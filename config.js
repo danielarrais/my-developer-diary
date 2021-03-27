@@ -1,7 +1,7 @@
 "use strict"
 
 module.exports = {
-  url: "https://danielarrais.dev",
+  url: "https://boring-swanson-fa7e2c.netlify.app/",
   title: "DANIELARRAIS.DEV",
   tagline: "sITE",
   copyright: "©2021 Daniel Arrais, All rights reserved",
