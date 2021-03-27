@@ -3,7 +3,7 @@
 module.exports = {
   url: "https://boring-swanson-fa7e2c.netlify.app/",
   title: "DANIELARRAIS.DEV",
-  tagline: "sITE",
+  tagline: "Desenvolvedor Java",
   copyright: "©2021 Daniel Arrais, All rights reserved",
   author: {
     name: "Daniel Arrais",
