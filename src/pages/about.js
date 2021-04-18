@@ -47,8 +47,8 @@ const AboutPage = (props) => {
                             </span>
                             <p className="d-inline-block ml-3 w-75 align-top">Tech tags designed for web developers</p>
                             <div className="ml-5">
+                                <TechTag tag="java" tech="Java" name={tags["java"]} size={20} color="lightgreen" />
                                 <TechTag tag="react" tech="React" name={tags["react"]} size={20} color="deepskyblue" />
-                                <TechTag tag="nodejs" tech="Node.js" name={tags["nodejs"]} size={20} color="lightgreen" />
                                 <TechTag tag="html" tech="HTML" name={tags["html"]} size={20} color="darkorange" />
                                 <TechTag tag="css" tech="CSS" name={tags["css"]} size={20} color="teal" />
                             </div>  

@@ -13,7 +13,7 @@ module.exports = {
       github: "https://github.com/danielarrais",
       stackoverflow: "https://stackoverflow.com/users/9537152/daniel-arrais?tab=profile",
       twitter: "https://twitter.com/DanielArrais",
-      freecodecamp: "",
+      freecodecamp: "https://twitter.com/DanielArrais",
     },
   },
   labels: [
