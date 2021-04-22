@@ -12,7 +12,7 @@ module.exports = {
       linkedin: "https://www.linkedin.com/in/daniel-arrais",
       github: "https://github.com/danielarrais",
       stackoverflow: "https://stackoverflow.com/users/9537152/daniel-arrais?tab=profile",
-      twitter: "https://twitter.com/DanielArrais"
+      twitter: "https://twitter.com/danielarraisdev"
     },
   },
   labels: [
