@@ -10,7 +10,7 @@ date: '2021-04-13'
 Zipar arquivos usando o Java é uma tarefas simples, começando pelo fato de que ele conta com uma API nativa para tal, no
 pacote `java.io`. E, para vermos essa simplicidade na prática, vamos começar esse artigo com a implementação do
 zipamento de um arquivo, que será base para zipamento de múltiplos arquivos e de pastas.
-
+<br>
 
 ## Zipar um arquivo
 
@@ -21,35 +21,7 @@ para gravar bytes no disco e a FileInputStream para ler. Já a ZipOutputStream �
 criar e gravar arquivos zip's e a ZipEntry é utilizada para adionar arquivos dentro do ZIP, nela podemos adicionar
 informações sobre o arquivo, como seu nome. No código abaixo podemos visualizar a solução proposta.
 
-```java
-// Busca o arquivo que queremos compactar
-File file=new File("/home/daniel/teste_zip/gettyimages-521637760-170667a.jpg");
-
-// Cria nosso "Winrar"
-FileOutputStream fileOutputStream=new FileOutputStream("file.zip");
-ZipOutputStream zipOutputStream=new ZipOutputStream(fileOutputStream);
-
-// Cria o Stream que vai ler os bytes do nosso arquivo
-FileInputStream fileInputStream=new FileInputStream(file);
-
-// Cria uma entrada informando no contrutor o nome do arquivo
-ZipEntry zipEntry=new ZipEntry(file.getName());
-
-// Passa a entrada para nosso "WinRar"
-zipOutputStream.putNextEntry(zipEntry);
-
-// Adiciona o arquivo proprieamente dito ao nosso arquivo ZIP
-byte[]bytes=new byte[1024];
-int length;
-while((length=fileInputStream.read(bytes))>=0){
-    zipOutputStream.write(bytes,0,length);
-}
-
-// Fecha nosso Streams instânciados
-fileInputStream.close();
-zipOutputStream.close();
-fileOutputStream.close();
-```
+<script src="https://gist.github.com/danielarrais/fc2a5d887c2094aca417bdbc65e6f0ba.js"></script>
 
 O código é simples e consegue zipar um único arquivo, nele não há segredos:
 
@@ -66,7 +38,7 @@ por aqui, é possível a partir desse código criar soluções para compactar m�
 de continuar a leitura, tente melhorar o código proposto e a partir do resultado crie suas próprias soluções. Deixo
 apenas uma dica: na compactação das pastas a **recursividade** pode ser uma grande amiga... acho que entreguei o bolo
 pronto rsrsrsrs.
-
+<br>
 
 ## Zipar múltiplos arquivos
 
@@ -77,52 +49,16 @@ seguinte assinatura: `void addFileInZip(ZipOutputStream zipOutputStream, File fi
 a parte do código criado que adiciona o arquivo dentro dentro do zip e substituí-la no método anterior pela chamado do
 método, como mostra o código a seguir.
 
-```java
-public static void zipFile(File file,String zipName)throws IOException{
-  FileOutputStream fileOutputStream=new FileOutputStream(zipName);
-  ZipOutputStream zipOutputStream=new ZipOutputStream(fileOutputStream);
+<script src="https://gist.github.com/danielarrais/6a6890c61ad38f8f9adfb2723b4d2dbd.js"></script>
 
-  addFileInZip(zipOutputStream,file);
-
-  zipOutputStream.close();
-  fileOutputStream.close();
-}
-
-public static void addFileInZip(ZipOutputStream zipOutputStream,File file)throws IOException{
-  FileInputStream fileInputStream=new FileInputStream(file);
-
-  ZipEntry zipEntry=new ZipEntry(file.getName());
-  zipOutputStream.putNextEntry(zipEntry);
-
-  byte[]bytes=new byte[1024];
-  int length;
-  while((length=fileInputStream.read(bytes))>=0){
-    zipOutputStream.write(bytes,0,length);
-  }
-
-  fileInputStream.close();
-}
-```
+<script src="https://gist.github.com/danielarrais/455f23dc7ffa7da49adfe14d1671cb99.js"></script>
 
 Agora que refatoramos nosso código e temos um método que adiciona um arquivo dentro do zip, podemos criar o novo método
 que zipa vários arquivos. Nós vamos precisar receber nele uma lista de arquivos e o nome do arquivo zip, essa lista
 deverá ser iterada e adicionada ao zip. O resultado é mostrado a seguir.
 
-
-```java
-public static void zipFiles(List<File> files, String zipName) throws IOException {
-  FileOutputStream fileOutputStream = new FileOutputStream(zipName);
-  ZipOutputStream zipOutputStream = new ZipOutputStream(fileOutputStream);
-
-  for (File file : files) {
-    addFileInZip(zipOutputStream, file);
-  }
-
-  zipOutputStream.close();
-  fileOutputStream.close();
-}
-```
-
+<script src="https://gist.github.com/danielarrais/9ffc6d83c52ef8bac736dc3a4415499a.js"></script>
+<br>
 
 ## Zipar pastas
 
@@ -133,32 +69,7 @@ aqui é chamarmos o método `addFileInZip` passando a pasta e irmos chamando ele
 pasta encontrada. Vendo a ideia já nos deparamos com um problema: teremos pastas e arquivos, então nosso método deverá
 está preparado para processar pasta ou arquivo. A seguir a solução proposta para facilitar o entendimento.
 
-```java
-private static void addFileInZip(File file, ZipOutputStream zipOutputStream, String parentPath) throws IOException {
-  if (file == null || file.isDirectory() && file.listFiles() == null) {
-    return;
-  }
-
-  if (file.isDirectory()) {
-     for (File childFile : file.listFiles()) {
-        addFileInZip(childFile, zipOutputStream, parentPath + "/" + file.getName());
-     }
-  } else {
-     FileInputStream fileInputStream = new FileInputStream(file);
-   
-     ZipEntry zipEntry = new ZipEntry(parentPath + "/" + file.getName());
-     zipOutputStream.putNextEntry(zipEntry);
-   
-     byte[] bytes = new byte[1048576];
-     int length;
-     while ((length = fileInputStream.read(bytes)) >= 0) {
-        zipOutputStream.write(bytes, 0, length);
-     }
-
-    fileInputStream.close();
-  }
-}
-```
+<script src="https://gist.github.com/danielarrais/a2f9d955519d8d18de30476f6482a221.js"></script>
 
 Para lidar se o File passado é um arquivo ou uma pasta utilizei o método `isDirectory()`. Quando ele retorna `true`
 itero a lista de arquivos da pasta - obtida por meio do método `listFiles()`, chamando o método de forma recursiva,
