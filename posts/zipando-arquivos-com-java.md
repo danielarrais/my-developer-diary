@@ -87,7 +87,9 @@ O resultado final pode ser visualizado no gist abaixo:
 
 <script src="https://gist.github.com/danielarrais/a2f9d955519d8d18de30476f6482a221.js?file=block_six.java"></script>
 
-Dicas ou sugestões? Deixe seu comentário!
+<br />
+
+#### Dicas ou sugestões? Deixe seu comentário!
 
 <br />
 
