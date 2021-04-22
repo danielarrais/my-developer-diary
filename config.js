@@ -1,7 +1,7 @@
 "use strict"
 
 module.exports = {
-  url: "https://boring-swanson-fa7e2c.netlify.app/",
+  url: "https://danielarrais.dev/",
   title: "DANIELARRAIS.DEV",
   tagline: "Desenvolvedor Java",
   copyright: "©2021 Daniel Arrais, All rights reserved",
@@ -12,8 +12,7 @@ module.exports = {
       linkedin: "https://www.linkedin.com/in/daniel-arrais",
       github: "https://github.com/danielarrais",
       stackoverflow: "https://stackoverflow.com/users/9537152/daniel-arrais?tab=profile",
-      twitter: "https://twitter.com/DanielArrais",
-      freecodecamp: "https://twitter.com/DanielArrais",
+      twitter: "https://twitter.com/DanielArrais"
     },
   },
   labels: [

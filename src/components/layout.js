@@ -27,7 +27,6 @@ const Layout = ({ children }) => {
               linkedin
               github
               stackoverflow
-              freecodecamp
               twitter
             }
           }

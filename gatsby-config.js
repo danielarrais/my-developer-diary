@@ -13,7 +13,6 @@ module.exports = {
       linkedin: siteConfig.author.contacts.linkedin,
       github: siteConfig.author.contacts.github,
       stackoverflow: siteConfig.author.contacts.stackoverflow,
-      freecodecamp: siteConfig.author.contacts.freecodecamp,
       twitter: siteConfig.author.contacts.twitter,
     },
     labels: siteConfig.labels,
