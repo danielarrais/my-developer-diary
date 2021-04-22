@@ -91,6 +91,4 @@ O resultado final pode ser visualizado no gist abaixo:
 
 #### Dicas ou sugestões? Deixe seu comentário!
 
-<br />
-
 <div class="powr-comments" id="09b98bed_1619106882"></div><script src="https://www.powr.io/powr.js?platform=html"></script>
