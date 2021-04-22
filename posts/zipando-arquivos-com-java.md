@@ -87,7 +87,4 @@ então criar um método chamado `zipFolder` que chama o `zipFile`.
 
 O resultado final pode ser visualizado no gist abaixo:
 
-<script src="https://gist.github.com/danielarrais/bbdb631d2dcc41baf18cc6f914e2ccb6.js"></script>
-
-
-
+<script src="https://gist.github.com/danielarrais/a2f9d955519d8d18de30476f6482a221.js?file=block_six.java"></script>
