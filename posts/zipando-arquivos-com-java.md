@@ -49,7 +49,6 @@ seguinte assinatura: `void addFileInZip(ZipOutputStream zipOutputStream, File fi
 a parte do código criado que adiciona o arquivo dentro dentro do zip e substituí-la no método anterior pela chamado do
 método, como mostra o código a seguir.
 
-
 <script src="https://gist.github.com/danielarrais/a2f9d955519d8d18de30476f6482a221.js?file=block_two.java"></script>
 <script src="https://gist.github.com/danielarrais/a2f9d955519d8d18de30476f6482a221.js?file=block_three.java"></script>
 
@@ -58,7 +57,6 @@ que zipa vários arquivos. Nós vamos precisar receber nele uma lista de arquivo
 deverá ser iterada e adicionada ao zip. O resultado é mostrado a seguir.
 
 <script src="https://gist.github.com/danielarrais/a2f9d955519d8d18de30476f6482a221.js?file=block_four.java"></script>
-<br>
 
 ## Zipar pastas
 
