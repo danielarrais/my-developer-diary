@@ -21,7 +21,7 @@ para gravar bytes no disco e a FileInputStream para ler. Já a ZipOutputStream �
 criar e gravar arquivos zip's e a ZipEntry é utilizada para adionar arquivos dentro do ZIP, nela podemos adicionar
 informações sobre o arquivo, como seu nome. No código abaixo podemos visualizar a solução proposta.
 
-<script src="https://gist.github.com/danielarrais/fc2a5d887c2094aca417bdbc65e6f0ba.js"></script>
+<script src="https://gist.github.com/danielarrais/a2f9d955519d8d18de30476f6482a221.js?file=block_one.java"></script>
 
 O código é simples e consegue zipar um único arquivo, nele não há segredos:
 
@@ -49,15 +49,15 @@ seguinte assinatura: `void addFileInZip(ZipOutputStream zipOutputStream, File fi
 a parte do código criado que adiciona o arquivo dentro dentro do zip e substituí-la no método anterior pela chamado do
 método, como mostra o código a seguir.
 
-<script src="https://gist.github.com/danielarrais/6a6890c61ad38f8f9adfb2723b4d2dbd.js"></script>
 
-<script src="https://gist.github.com/danielarrais/455f23dc7ffa7da49adfe14d1671cb99.js"></script>
+<script src="https://gist.github.com/danielarrais/a2f9d955519d8d18de30476f6482a221.js?file=block_two.java"></script>
+<script src="https://gist.github.com/danielarrais/a2f9d955519d8d18de30476f6482a221.js?file=block_three.java"></script>
 
 Agora que refatoramos nosso código e temos um método que adiciona um arquivo dentro do zip, podemos criar o novo método
 que zipa vários arquivos. Nós vamos precisar receber nele uma lista de arquivos e o nome do arquivo zip, essa lista
 deverá ser iterada e adicionada ao zip. O resultado é mostrado a seguir.
 
-<script src="https://gist.github.com/danielarrais/9ffc6d83c52ef8bac736dc3a4415499a.js"></script>
+<script src="https://gist.github.com/danielarrais/a2f9d955519d8d18de30476f6482a221.js?file=block_four.java"></script>
 <br>
 
 ## Zipar pastas
@@ -69,7 +69,7 @@ aqui é chamarmos o método `addFileInZip` passando a pasta e irmos chamando ele
 pasta encontrada. Vendo a ideia já nos deparamos com um problema: teremos pastas e arquivos, então nosso método deverá
 está preparado para processar pasta ou arquivo. A seguir a solução proposta para facilitar o entendimento.
 
-<script src="https://gist.github.com/danielarrais/a2f9d955519d8d18de30476f6482a221.js"></script>
+<script src="https://gist.github.com/danielarrais/a2f9d955519d8d18de30476f6482a221.js?file=block_five.java"></script>
 
 Para lidar se o File passado é um arquivo ou uma pasta utilizei o método `isDirectory()`. Quando ele retorna `true`
 itero a lista de arquivos da pasta - obtida por meio do método `listFiles()`, chamando o método de forma recursiva,
