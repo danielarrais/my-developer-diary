@@ -1,89 +1,87 @@
 ---
 title: 'Zipando arquivos com java'
 tags: ["java", "zip"]
-published: true
+published: true 
 date: '2021-04-13'
 ---
 
 # Zipar arquivos/pastas usando Java
 
-Zipar arquivos usando o Java é uma tarefas simples, começando pelo fato de que ele conta com uma API nativa para tal, no
-pacote `java.io`. E, para vermos essa simplicidade na prática, vamos começar esse artigo com a implementação do
-zipamento de um arquivo, que será base para zipamento de múltiplos arquivos e de pastas.
-<br>
+Zipar arquivos usando o Java é uma tarefas simples e não precisamos de bibliotecas de terceiros para isso. Para vermos
+esta simplicidade na prática começarei o artigo implementando a zipagem de um arquivo, que também será utilizado na
+zipagem de múltiplos arquivos e de pastas.
 
 ## Zipar um arquivo
 
-Considero bastante importante, antes de codificarmos a solução por mim proposta, entendermos algumas das classes que
-vamos utilizar. Na minha solução precisamos principalmente destas classes: `java.io.FileOutputStream`
-, `java.io.FileInputStream`, `java.util.zip.ZipOutputStream` e a `java.util.zip.ZipEntry`. A FileOutputStream é usada
-para gravar bytes no disco e a FileInputStream para ler. Já a ZipOutputStream é uma FileOutputStream especializada em
-criar e gravar arquivos zip's e a ZipEntry é utilizada para adionar arquivos dentro do ZIP, nela podemos adicionar
-informações sobre o arquivo, como seu nome. No código abaixo podemos visualizar a solução proposta.
+O código necessário para zipar um arquivo é este:
 
 <script src="https://gist.github.com/danielarrais/a2f9d955519d8d18de30476f6482a221.js?file=block_one.java"></script>
 
-O código é simples e consegue zipar um único arquivo, nele não há segredos:
+No código você pode notar que utilizei as classes `java.io.FileOutputStream` , `java.io.FileInputStream`,
+`java.util.zip.ZipOutputStream` e a `java.util.zip.ZipEntry`. Elas possuem alguns papéis, a `FileOutputStream` é
+necessária para gravar bytes no disco e a `FileInputStream` para ler; a `ZipOutputStream` é uma `FileOutputStream`
+especializada em criar e gravar arquivos zip's e dispõe de métodos que auxiliam tal tarefa; a `ZipEntry` é utilizada
+para adicionar arquivos dentro do ZIP, nela podemos adicionar informações sobre o arquivo, como o nome dele.
 
-1. primeiro criamos uma instância de File passando a URL do arquivo a ser compactado;
-2. depois instanciamos nossos Streams, o FileOutputStream ****e ****ZipOutputStream;
-3. criamos o FileInputStream que irá ler nosso arquivo e para isso passamos ele no construtor;
-4. criamos uma instância ZipEntry passando o nome do nosso arquivo no construtor e depois passamos ela para a
-   ZipOutputStream por meio do método putNextEntry;
-5. depois lemos os bytes do arquivo e gravamos eles, compactados, usando nossa variável zipOutputStream;
-6. por fim fechamos nossos streams instanciados.
+Como você deve ter notado (espero rsrsrsrs), o código é simples e consegue zipar um único arquivo. Nele não há segredos:
 
-Pronto! Zipamos um arquivo! Viu como é simples zipar arquivos usando somente classes nativas do Java? Mas não pararemos
-por aqui, é possível a partir desse código criar soluções para compactar múltiplos arquivos e pastas! Sugiro que antes
-de continuar a leitura, tente melhorar o código proposto e a partir do resultado crie suas próprias soluções. Deixo
-apenas uma dica: na compactação das pastas a **recursividade** pode ser uma grande amiga... acho que entreguei o bolo
-pronto rsrsrsrs.
+1. Primeiro criamos uma instância de File passando a URL do arquivo a ser compactado;
+2. Instanciamos nossos Streams, a `FileOutputStream` e a `ZipOutputStream`;
+3. Criamos o `FileInputStream` que lerá nosso arquivo, que é passado no construtor;
+4. Criamos uma instância `ZipEntry` passando o nome do arquivo no construtor e depois passamos ela para a
+   `ZipOutputStream` por meio do método `putNextEntry`;
+5. Lemos os bytes do arquivo e gravamos eles, compactados, usando a nossa variável `zipOutputStream`;
+6. Por fim, fechamos os streams instanciados.
+
+Pronto! Agora temos um código Java capaz de zipar um arquivo e você entende como ele funciona! Não pararemos por aqui e
+nos próximos tópicos você verá soluções para compactar múltiplos arquivos e pastas! Porém, sugiro que antes de continuar
+a leitura, tente melhorar o código proposto e implementarmos suas próprias soluções. Deixo apenas uma dica: na
+compactação de pastas a **recursividade** pode ser uma aliada.
 <br>
 
 ## Zipar múltiplos arquivos
 
-Antes de criarmos a solução vamos encapsular o código anterior em um método com a seguinte
+Antes de implementarmos a solução vamos encapsular o código anterior em um método com a seguinte
 assinatura: `void zipFile(File file, String zipName)`. A principal mudança fica a cargo do recebimento do arquivo e do
-nome do zip como argumento. Além desse método vamos criar mais um, para adicionar um arquivo dentro do zip, com a
-seguinte assinatura: `void addFileInZip(ZipOutputStream zipOutputStream, File file)`. Dentro deste método vamos colocar
-a parte do código criado que adiciona o arquivo dentro dentro do zip e substituí-la no método anterior pela chamado do
-método, como mostra o código a seguir.
+nome do zip como argumentos. Vamos encapsular também a parte do código que adiciona arquivos dentro do zip, ele terá a
+seguinte assinatura: `void addFileInZip(ZipOutputStream zipOutputStream, File file)`. Após essa refatoração nosso
+primeiro código ficará como a seguir.
 
 <script src="https://gist.github.com/danielarrais/a2f9d955519d8d18de30476f6482a221.js?file=block_two.java"></script>
 <script src="https://gist.github.com/danielarrais/a2f9d955519d8d18de30476f6482a221.js?file=block_three.java"></script>
 
-Agora que refatoramos nosso código e temos um método que adiciona um arquivo dentro do zip, podemos criar o novo método
-que zipa vários arquivos. Nós vamos precisar receber nele uma lista de arquivos e o nome do arquivo zip, essa lista
-deverá ser iterada e adicionada ao zip. O resultado é mostrado a seguir.
+Agora que temos um método que adiciona um arquivo dentro do zip podemos criar o novo método que zipa vários. Nele temos
+que receber uma lista de arquivos e o nome do zip, essa lista deverá ser iterada e ter cada item adicionado ao zip,
+ficando assim:
 
-<script src="https://gist.github.com/danielarrais/a2f9d955519d8d18de30476f6482a221.js?file=block_four.java"></script>
+<script src="https://gist.github.com/danielarrais/a2f9d955519d8d18de30476f6482a221.js?file=block_four.java"></script><br/>
 
 ## Zipar pastas
 
-A zipagem de uma pasta já é um pouco mais complexa - bem pouco mesmo - pois precisamos vasculhar ela em busca de todos
-os arquivos e adicioná-los ao ZIP, e isso pode ser feito utilizando recursividade. Para isso vamos duplicar nosso
-método `addFileInZip` e vamos adicionar mais um parâmetro do tipo String chamado `parentPath` em sua assinatura. A ideia
-aqui é chamarmos o método `addFileInZip` passando a pasta e irmos chamando ele de forma recursiva para cada arquivo ou
-pasta encontrada. Vendo a ideia já nos deparamos com um problema: teremos pastas e arquivos, então nosso método deverá
-está preparado para processar pasta ou arquivo. A seguir a solução proposta para facilitar o entendimento.
+A zipagem de uma pasta é um pouco mais complexa - bem pouco mesmo - pois precisamos vasculhá-la em busca dos arquivos
+para adicioná-los ao ZIP. Essa busca pode ser facilitada com uso de recursividade. Para isso vamos duplicar nosso
+método `addFileInZip` adicionando mais um parâmetro chamado `parentPath` em sua assinatura. A ideia aqui é chamarmos ele
+passando o arquivo/pasta e o nome do caminho deles, repetindo isso forma recursiva para cada arquivo ou pasta
+encontrada. O método deve trabalhar receber tanto pastas quanto arquivos. Para melhor entendimento a seguir temos a
+implementação do que foi comentado.
 
 <script src="https://gist.github.com/danielarrais/a2f9d955519d8d18de30476f6482a221.js?file=block_five.java"></script>
 
-Para lidar se o File passado é um arquivo ou uma pasta utilizei o método `isDirectory()`. Quando ele retorna `true`
-itero a lista de arquivos da pasta - obtida por meio do método `listFiles()`, chamando o método de forma recursiva,
-passando cada um dos arquivos para ele e concatenando o nome do arquivo/pasta com a variável parentPath. Assim a medida
-que o método vai explorando a pasta ele vai recebendo o caminho correto da pasta. Caso o resultado dê `falso` ele faz o
-processamento normal que já fizemos, com a diferença na concatenação do path da pasta pai com o nome do arquivo.
+Para verificar o File passado é um arquivo ou uma pasta utilizei o método `isDirectory()`. Se for uma pasta eu itero os
+arquivos dela - obtido por meio do método `listFiles()`, chamando o método de forma recursiva e passando para ele o path
+do arquivo/pasta concatendado com `parentPath`. A concatenação é necessária para que ao chegar em um arquivo, o path
+recebido seja completo. Caso seja um arquivo, ele adiciona o arquivo ao ZIP normalmente, concatenando a
+váriavel `parentPath` ao seu nome para que seu path dentro do zip fique correto.
 
-E como você deve ter notado, agora o código do primeiro método `addFileInZip` está duplicado no segundo criado. Para
-resolvermos isso você pode substituir todo o código do primeiro por uma chamada do segundo método, passando no terceiro
-paramêtro uma String vazia. Assim deixamos nosso código sem duplicidade e mais simples de manter.
+E como você deve ter notado, agora o código do primeiro método `addFileInZip` está duplicado. Para resolver isso você
+pode substituir todo o código do `addFileInZip` original por uma chamada do novo, passando no terceiro paramêtro uma
+String vazia. Assim deixamos nosso código mais clean e manutenível.
 
-Com essa refatoração vemos que não precisamos criar um método exclusivo para compactar pasta, pois o `zipFile` já vai
-conseguir realizar tal tarefa. Porém você pode para ficar mais claro renomêá-lo para `zipFileOrFolder` por exemplo, ou
-então criar um método chamado `zipFolder` que chama o `zipFile`.
+Com essa refatoração no `addFileInZip` podemos perceber que não precisamos criar um método exclusivo para compactação
+de pasta, pois o `zipFile` já vai ser capaz de tal tarefa. Porém, por questão de semântica, você pode renomêá-lo
+para `zipFileOrFolder` ou criar um método chamado `zipFolder` que chama o `zipFile`.
 
-O resultado final pode ser visualizado no gist abaixo:
+O resultado final pode ser visualizado abaixo:
 
 <script src="https://gist.github.com/danielarrais/a2f9d955519d8d18de30476f6482a221.js?file=block_six.java"></script>
 
