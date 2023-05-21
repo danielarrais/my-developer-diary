@@ -1,4 +1,9 @@
-
+---
+title: 'Criando componentes do Rabbitt de forma dinâmica no Spring Boot'
+tags: ["java", "spring", "rabbitmq"]
+published: true
+date: '2023-05-20'
+---
 
 # Criando componentes do Rabbitt de forma dinâmica no Spring Boot
 
